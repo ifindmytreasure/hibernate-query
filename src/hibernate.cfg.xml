@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+    <!--DB连接四要素-->
+<!--    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>-->
+<!--    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test?serverTimezone=GMT</property>-->
+<!--    <property name="hibernate.connection.username">root</property>-->
+<!--    <property name="hibernate.connection.password">123456</property>-->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+    <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+    <!--同一线程中获取的session是同一个session-->
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <!--开启二级缓存-->
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    <!--注册二级缓存区域工厂-->
+    <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.internal.EhcacheRegionFactory</property>
+    <!--开启query缓存总开关-->
+    <property name="hibernate.cache.use_query_cache">true</property>
+    <!--事务隔离级别为可重复读-->
+    <property name="hibernate.connection.isolation">4</property>
+    <mapping resource="com/ebaotech/study/domain/student.hbm.xml"/>
+    <mapping resource="com/ebaotech/study/domain/minister.hbm.xml"/>
+    <mapping resource="com/ebaotech/study/domain/country.hbm.xml"/>
+    <mapping resource="com/ebaotech/study/domain/newsLabel.hbm.xml"/>
+    <mapping class="com.ebaotech.study.domain.Order"/>
+    <!--指定类缓存-->
+    <class-cache class="com.ebaotech.study.domain.Minister" usage="read-only"/>
+    <!--指定集合缓存-->
+    <collection-cache collection="com.ebaotech.study.domain.Country.ministers" usage="read-only"/>
+<!--    <mapping resource="com/ebaotech/study/domain/course.hbm.xml"/>-->
+<!--    <mapping resource="com/ebaotech/study/domain/scholar.hbm.xml"/>-->
+
+</session-factory>
+
+</hibernate-configuration>

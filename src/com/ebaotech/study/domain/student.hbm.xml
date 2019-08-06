@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ebaotech.study.domain">
+<!--映射文件-->
+    <class name="Student" table="t_student" >
+        <id name="id" column="t_id">
+            <generator class="native"/>
+        </id>
+        <version name="stuVersion" column="t_version"/>
+        <property name="name" column="t_name"/>
+        <property name="age" column="t_age"/>
+        <property name="score" column="t_score"/>
+    </class>
+    <query name="queryById">from Student where id=:id</query>
+</hibernate-mapping>

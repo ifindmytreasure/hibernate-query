@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ebaotech.study.domain">
+    <!--映射文件-->
+    <class name="Course" table="t_course">
+        <id name="courseId" column="course_id">
+            <generator class="native"/>
+        </id>
+        <property name="courseName" column="course_name"/>
+        <set name="scholars" cascade="save-update" table="middle">
+            <key column="course_id"/>
+            <many-to-many class="Scholar" column="stu_id"/>
+        </set>
+    </class>
+</hibernate-mapping>
